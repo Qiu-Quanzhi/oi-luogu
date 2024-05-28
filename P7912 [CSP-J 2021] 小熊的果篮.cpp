@@ -34,14 +34,15 @@ void solve(){
             if(a.front()>tmp){
                 printf("%d ",a.front());a.pop();
                 while(!a.empty()&&a.front()>tmp){
-                    a.push(a.front());a.pop();
+                    a.push(tmp=a.front());a.pop();
                 }
             }else{
                 printf("%d ",b.front());b.pop();
                 while(!b.empty()&&b.front()>tmp){
-                    b.push(b.front());b.pop();
+                    b.push(tmp=b.front());b.pop();
                 }
             }
+            printf("\n");
             tmp=0;
         }
     }
