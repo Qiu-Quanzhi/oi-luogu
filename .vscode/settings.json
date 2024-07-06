@@ -4,6 +4,8 @@
         "array": "cpp",
         "deque": "cpp",
         "vector": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "cmath": "cpp",
+        "set": "cpp"
     }
 }
