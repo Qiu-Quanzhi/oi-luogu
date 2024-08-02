@@ -32,7 +32,8 @@
             "-g",
             "${file}",
             "-o",
-            "${fileDirname}\\dist\\${fileBasenameNoExtension}.exe"
+            "${fileDirname}\\dist\\${fileBasenameNoExtension}.exe",
+            "-O0"
         ],
         "options": {
             "cwd": "${fileDirname}"
