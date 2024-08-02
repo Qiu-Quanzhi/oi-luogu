@@ -5,7 +5,6 @@ const int N=1e6;
 char str[N];//原始字符串
 int x[N];//x[i]表示位置i第一关键字的大小
 int y[N];//y[i]表示第二关键字排名为i，其第一关键字的位置
-int c[N];
 int sa[N];//sa记录子串长度为k时的排名
 int rk[N];
 int height[N];
@@ -13,17 +12,16 @@ namespace algorithm{
     void counting_sort(int *first,int *last,int *result,int w){
 		int cnt[w];
 		memset(cnt,0,sizeof(cnt));
-		for (auto i = first; i < last; ++i) ++cnt[a[i]];
-		for (int i = 1; i <= w; i++) cnt[i] += cnt[i - 1];
-		for (int i = n; i >= 1; --i) b[cnt[a[i]]--] = a[i];
+		for (auto i = first; i < last; ++i) ++cnt[*i];
+		for (int i = 1; i <= w; ++i) cnt[i] += cnt[i - 1];
+		for (auto i = last-1; i >= first; --i) *(result+cnt[*i]--) = i-first+1;
 	}
 }
-void Get_SA(int n=std::strlen(str), char m='z'){//获取长度为n，最大值不超过m的sa数组
+void Get_SA(int n=std::strlen(str), char w='z'){//获取长度为n，最大值不超过m的sa数组
+	int c[w];
 	//使用计数排序初始化sa，如果m特别大可以考虑这部分用快速排序
     std::copy(str,str+n,x+1);
-    for (int  i = 1; i <= n; i++) c[x[i]]++;
-    for (int i = 1; i <= m; ++i) c[i] += c[i - 1];
-    for (int i = n; i >= 1; --i) sa[c[x[i]]--] = i;
+	algorithm::counting_sort(x+1,x+n+1,sa,w);
 	//倍增处理不同位置的子串，当长度达到一定大时自然就成了后缀，进行若干次基数排序
 	
     for (int k = 1; k <= n; k <<= 1) {//第n - k + 1到第n位是没有第二关键字的，所以排名在最前面
@@ -33,10 +31,10 @@ void Get_SA(int n=std::strlen(str), char m='z'){//获取长度为n，最大值�
 		//如果满足(sa[i]>k)，说明它可以作为别人的第二关键字，就把它的第一关键字的位置添加进y
 		for (int i = 1; i <= n; ++i) if (sa[i] > k) y[++num] = sa[i] - k;
 		//基数排序，更新sa，即子串长度为k时的排名
-        std::fill(c+1,c+m+1,0);
+		memset(c,0,sizeof(c));
 
 		for (int i = 1; i <= n; ++i) ++c[x[i]];
-		for (int i = 1; i <= m; ++i) c[i] += c[i - 1];
+		for (int i = 1; i <= w; ++i) c[i] += c[i - 1];
 		for (int i = n; i >= 1; --i) sa[c[x[y[i]]]--] = y[i];
 		//更新x，即记录位置为i长度为k的子串大小，此时的y已经没用了，这里是将x传递给y。
 		std::swap(x,y);
@@ -48,10 +46,10 @@ void Get_SA(int n=std::strlen(str), char m='z'){//获取长度为n，最大值�
 			x[sa[i]] = (y[sa[i]] == y[sa[i - 1]] && y[sa[i] + k] == y[sa[i - 1] + k]) ? num : ++num;
 		//如果大小值域达到n，就说明没有相同的字符串，接下来排序不会改变sa的值。
 		if (num == n) break;//ok
-		m = num;
+		w = num;
     }
 }
-namespace reference
+/*namespace reference
 {
     void Get_SA(int n, int m){//获取长度为n，最大值不超过m的sa数组
 	//使用计数排序初始化sa，如果m特别大可以考虑这部分用快速排序
@@ -86,7 +84,7 @@ namespace reference
 		m = num;
     }
 
-}
+}*/
 
 // void Get_Height() {//获取height数组
 //     int k = 0;
@@ -100,7 +98,7 @@ namespace reference
 //         height[rk[i]] = k;
 //     }
 // }
-} // namespace reference
+// } // namespace reference
 
 int main(){
     char a[]="ababa";
