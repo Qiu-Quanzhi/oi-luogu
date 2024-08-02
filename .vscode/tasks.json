@@ -1,27 +1,50 @@
 {
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: g++ 生成活动文件",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/dist/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "调试器生成的任务。"
+        "type": "cppbuild",
+        "label": "C/C++: g++ Linux",
+        "command": "/usr/bin/g++",
+        "args": [
+            "-fdiagnostics-color=always",
+            "-g",
+            "${file}",
+            "-o",
+            "${fileDirname}/dist/${fileBasenameNoExtension}"
+        ],
+        "options": {
+            "cwd": "${fileDirname}"
+        },
+        "problemMatcher": [
+            "$gcc"
+        ],
+        "group": {
+            "kind": "build",
+            "isDefault": false
+        },
+        "detail": "自定义方案"
+        },
+        {
+        "type": "cppbuild",
+        "label": "C/C++: g++ Windows",
+        "command": "g++",
+        "args": [
+            "-fdiagnostics-color=always",
+            "-g",
+            "${file}",
+            "-o",
+            "${fileDirname}\\dist\\${fileBasenameNoExtension}.exe"
+        ],
+        "options": {
+            "cwd": "${fileDirname}"
+        },
+        "problemMatcher": [
+            "$gcc"
+        ],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        },
+        "detail": "自定义方案"
         }
     ],
     "version": "2.0.0"
