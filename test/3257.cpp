@@ -5,21 +5,23 @@
 const int N=2e6;
 int n;char str[N];
 namespace SA{
-    unsigned long long sa[N<<1],rk[N<<1],height[N];
+    typedef unsigned long long T;
+    T sa[N<<1],rk[N<<1],height[N];
     int rkn;
-    void display(unsigned long long sa[]=sa){
+    void display(T a[]=sa){
         for (int i=0;i<n;i++)
-            std::cout<<sa[i]<<" ";
+            std::cout<<a[i]<<" ";
         std::cout<<"\n";
     }
-    void display_decode(unsigned long long sa[]=sa){
-        for (int i=0;i<n;i++)
-            std::cout<<((sa[i]&0xffffffff00000000)>>32)<<"|"<<(sa[i]&0xffffffff)<<" ";
-        std::cout<<"\n";
-    }
+    // void display_decode(T sa[]=sa){
+    //     for (int i=0;i<n;i++)
+    //         std::cout<<((sa[i]&~(int)-1)>>32)<<"|"<<(sa[i]&(int)-1)<<" ";
+    //     std::cout<<"\n";
+    // }
     void transition(){
         for (int i=0;i<n;i++)
             rk[sa[i]]=i;
+        std::swap(rk,sa);
     }
     bool rank(){
         std::copy(sa,sa+n,rk);
@@ -43,9 +45,9 @@ namespace SA{
         for (int i=0,k=0;i<n;++i) {
             if (rk[i]==0)continue;
             if (k)--k;
-            while (str[i + k] == str[sa[rk[i]] + k]) ++k;
-            height[rk[i]] = k;
-        }    
+            while (str[i+k]==str[sa[rk[i]-1]+k])++k;
+            height[rk[i]]=k;
+        }
     }
 }
 namespace oi{
@@ -56,16 +58,16 @@ namespace oi{
     }
     void init(){
         // oi::optimize_io();
-        char test_str[]="aabaaaab";
-        std::strcpy(str,test_str);
-        // std::cin>>str;
+        // char test_str[]="aabaaaab";
+        // std::strcpy(str,test_str);
+        std::cin>>str;
     }
     void solve(){
         SA::initSA();
         SA::transition();
         SA::initHeight();
         SA::display(SA::sa);
-        SA::display(SA::rk);
+        // SA::display(SA::rk);
         SA::display(SA::height);
     }
 }

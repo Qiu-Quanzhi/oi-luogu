@@ -9,7 +9,10 @@
             "-g",
             "${file}",
             "-o",
-            "${fileDirname}/dist/${fileBasenameNoExtension}"
+            "${fileDirname}/dist/${fileBasenameNoExtension}",
+            "-O2",
+            "-std=c++14",
+            "-Wall"
         ],
         "options": {
             "cwd": "${fileDirname}"
@@ -33,7 +36,9 @@
             "${file}",
             "-o",
             "${fileDirname}\\dist\\${fileBasenameNoExtension}.exe",
-            "-O0"
+            "-O2",
+            "-std=c++14",
+            "-Wall"
         ],
         "options": {
             "cwd": "${fileDirname}"
