@@ -9,7 +9,7 @@
             "-g",
             "${file}",
             "-o",
-            "${fileDirname}/dist/${fileBasenameNoExtension}",
+            "${workspaceFolder}/dist/${fileBasenameNoExtension}",
             "-O2",
             "-std=c++14",
             "-Wall"
@@ -35,7 +35,7 @@
             "-g",
             "${file}",
             "-o",
-            "${fileDirname}\\dist\\${fileBasenameNoExtension}.exe",
+            "${workspaceFolder}\\dist\\${fileBasenameNoExtension}.exe",
             "-O2",
             "-std=c++14",
             "-Wall"

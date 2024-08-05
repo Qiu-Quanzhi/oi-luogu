@@ -2,6 +2,7 @@
 #include <cmath>
 #include <algorithm>
 using namespace std; 
+//CJKC https://www.luogu.com.cn/article/pytvbmj3
 int w,n,ny,dp[100000],BIT[100001],
 // tmpx[100000],
 tmpy[100000];
