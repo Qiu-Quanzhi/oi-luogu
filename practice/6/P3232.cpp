@@ -20,7 +20,7 @@ void dbg(){
 	}
 		printf("\n");
 }
-void Gauss(){
+void Gause(){
 
 	for (int i=0;i<n;i++){
 		int r=i;
@@ -73,7 +73,7 @@ void solve(){
 		}
 	}
 	m[0][--n]=-1;
-	Gauss();n++,tot=0;
+	Gause();n++,tot=0;
 	for (int i=0;i<n;i++)
 		for (int j=h[i];j;j=e[j].nxt){
 			if (j&1)continue;
